@@ -157,12 +157,16 @@ public class WeatherActivity extends AppCompatActivity {
                 });
             }
 
+            void change(boolean t)
+            {
+                t=true;
+            }
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                final String responseText = response.body().string();
-                final Weather weather = Utility.handleWeatherResponse(responseText);
-
-                runOnUiThread(new Runnable() {
+                 final String responseText = response.body().string();
+                 final Weather weather = Utility.handleWeatherResponse(responseText);
+                 final boolean judge=false;
+                runOnUiThread(new Runnable () {
                     @Override
                     public void run() {
                             if(weather != null && "ok".equals(weather.status)){
@@ -170,6 +174,8 @@ public class WeatherActivity extends AppCompatActivity {
                                 editor.putString("weather",responseText);
                                 editor.apply();
                                 showWeatherInfo(weather);
+                                //在内部类中变量要被声明成final类型，即不可改变
+                                 change(judge);
                             }else {
                                 Toast.makeText(WeatherActivity.this, "获取天气信息失败", Toast.LENGTH_SHORT).show();
                             }
@@ -178,6 +184,10 @@ public class WeatherActivity extends AppCompatActivity {
                         }
 
                 });
+                if(judge){
+                    Intent intent1 = new Intent(WeatherActivity.this,AutoUpdateService.class);
+                    startService(intent1);
+                }
             }
         });
         loadBingPic();
@@ -220,9 +230,6 @@ public class WeatherActivity extends AppCompatActivity {
         carWashText.setText(carWash);
         sportText.setText(sport);
         weatherLayout.setVisibility(View.VISIBLE);
-
-        Intent intent = new Intent(this,AutoUpdateService.class);
-        startService(intent);
     }
 
     /*
