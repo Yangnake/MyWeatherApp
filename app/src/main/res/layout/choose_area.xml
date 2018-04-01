@@ -25,9 +25,11 @@
             android:layout_marginLeft="10dp"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:background="@drawable/ic_home"
             />
         <!-- android:background="@drawable/ic_back"-->
     </RelativeLayout>
+
     <ProgressBar
         android:id="@+id/pb"
         android:layout_width="match_parent"

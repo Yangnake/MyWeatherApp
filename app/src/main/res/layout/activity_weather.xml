@@ -13,6 +13,16 @@
         android:layout_height="match_parent"
         android:scaleType="centerCrop"/>
 
+   <!-- 布局加入滑动菜单功能-->
+<android.support.v4.widget.DrawerLayout
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <!-- 实现下拉刷新-->
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <ScrollView
         android:id="@+id/weather_layout"
         android:layout_width="match_parent"
@@ -41,4 +51,16 @@
 
     </ScrollView>
 
+   </android.support.v4.widget.SwipeRefreshLayout>
+
+    <fragment
+        android:id="@+id/choose_area_fragment"
+        android:name="com.example.myweatherapp.util.ChooseAreaFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="left"
+        />
+
+
+</android.support.v4.widget.DrawerLayout>
 </FrameLayout>
